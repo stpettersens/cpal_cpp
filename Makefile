@@ -2,7 +2,7 @@ SRC = src/cpal.cc
 TARGET = cpal
 TP = $(TARGET)
 
-CXX = g++-4.8
+CXX = g++-4.9
 
 make:
 	$(CXX) -s --std=c++11 $(SRC) -o $(TP)
