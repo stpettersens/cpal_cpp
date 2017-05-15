@@ -13,5 +13,5 @@ addons:
 
 script:
   - make
-  - cpal --help
+  - ./cpal --help
  
