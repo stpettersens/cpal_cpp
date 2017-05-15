@@ -3,7 +3,7 @@ TARGET = cpal
 TP = $(TARGET)
 
 make:
-	g++ -s --std=c++11 $(SRC) -o $(TP)
+	$(CXX) -s --std=c++11 $(SRC) -o $(TP)
 
 upx : make
 	upx -9 $(TP).exe -o $(TARGET).exe
