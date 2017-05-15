@@ -1,0 +1,9 @@
+notifications:
+  email: false
+ 
+language: c++
+
+script:
+  - make
+  - target/cpal --help
+ 
