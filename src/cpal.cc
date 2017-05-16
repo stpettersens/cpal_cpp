@@ -41,6 +41,7 @@ void write_configuration(std::string conf, bool verbose) {
     if(verbose) {
         std::cout << "Wrote configuration -> " << conf << std::endl; 
     }
+    exit(0);
 }
 
 configuration load_configuration(std::string conf, bool verbose) {
@@ -62,7 +63,13 @@ configuration load_configuration(std::string conf, bool verbose) {
 }
 
 void print_configuration(configuration c) {
-    // ...
+    std::cout << "configuration {" << std::endl;
+    std::cout << "\tssid: " << c.ssid << std::endl;
+    std::cout << "\tusername: " << c.username << std::endl;
+    std::cout << "\tpassword: " << c.password << std::endl;
+    std::cout << "\tauto_login: " << c.auto_login << std::endl;
+    std::cout << "\twifi_mode: " << c.wifi_mode << std::endl;
+    std::cout << "}" << std::endl;
 }
 
 void display_version() {
@@ -118,8 +125,7 @@ int main(int argc, char *argv[]) {
     }
     
     auto config = load_configuration(conf_json, verbose);
-    std::cout << config.ssid << std::endl;
-    std::cout << config.username << std::endl;
+    print_configuration(config);
 
     switch(op) {
         case 0:
