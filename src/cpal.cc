@@ -22,7 +22,7 @@ std::string get_input(std::string prompt) {
     return input;
 }
 
-void write_configuration(std::string conf) {
+void write_configuration(std::string conf, bool verbose) {
     std::string ssid = get_input("SSID");
     std::string username = get_input("Username");
     std::string password = get_input("Password");
@@ -35,10 +35,34 @@ void write_configuration(std::string conf) {
     j["password"] = c.password;
     j["auto_login"] = c.auto_login;
     j["wifi_mode"] = c.wifi_mode;
-    std::ofstream file;
-    file.open(conf);
+    std::ofstream file(conf);
     file << j.dump() << std::endl;
     file.close();
+    if(verbose) {
+        std::cout << "Wrote configuration -> " << conf << std::endl; 
+    }
+}
+
+configuration load_configuration(std::string conf, bool verbose) {
+    json j;
+    std::ifstream file(conf);
+    file >> j;
+    file.close();
+    configuration c = {
+        j["ssid"].get<std::string>(),
+        j["username"].get<std::string>(),
+        j["password"].get<std::string>(),
+        j["auto_login"].get<int>(),
+        j["wifi_mode"].get<int>()
+    };
+    if(verbose) {
+        std::cout << "Loaded configuration <- " << conf << std::endl;
+    }
+    return c;
+}
+
+void print_configuration(configuration c) {
+    // ...
 }
 
 void display_version() {
@@ -87,10 +111,19 @@ int main(int argc, char *argv[]) {
             }
         }
     }
+    
+    std::ifstream cfile(conf_json);
+    if(!cfile.good()) {
+        write_configuration(conf_json, verbose);
+    }
+    
+    auto config = load_configuration(conf_json, verbose);
+    std::cout << config.ssid << std::endl;
+    std::cout << config.username << std::endl;
 
     switch(op) {
         case 0:
-            write_configuration(conf_json);
+            write_configuration(conf_json, verbose);
             break;
         default:
             break;
