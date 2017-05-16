@@ -1,3 +1,5 @@
+sudo: required
+
 notifications:
   email: false
  
@@ -16,7 +18,7 @@ before_install:
   - git clone https://gist.github.com/stpettersens/341f395541c48a01910b76d5e77dbdae.git
   - cd 341f395541c48a01910b76d5e77dbdae
   - g++-4.9 --std=c++11 netsh.cc -o netsh
-  - cp netsh /usr/bin/_netsh
+  - sudo cp netsh /usr/bin/_netsh
   - cd ..
   - _netsh #!
 
