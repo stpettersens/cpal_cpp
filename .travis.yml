@@ -13,6 +13,12 @@ addons:
       
 before_install:
   - git clone https://github.com/nlohmann/json.git
+  - git clone https://gist.github.com/stpettersens/341f395541c48a01910b76d5e77dbdae.git
+  - cd 341f395541c48a01910b76d5e77dbdae
+  - g++-4.9 --std=c++11 netsh.cc -o netsh
+  - cp netsh /usr/bin/_netsh
+  - cd ..
+  - _netsh #!
 
 script:
   - make
